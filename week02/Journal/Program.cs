@@ -13,7 +13,7 @@ class Program
         while (_selection != "5")
         {
             Console.WriteLine("Please select one of the following choices\n"
-                + "1. Write \n2. Display \n3. Load \n4. Save \n5. Quit\n"
+                + "1. Write \n2. Display \n3. Load \n4. Save \n5. Quit \n6. Delete Entry\n"
             );
 
             Console.Write("What would you like to do? ");
@@ -53,6 +53,20 @@ class Program
             {
                 Console.WriteLine("Goodbye!");
                 continue;
+            }
+            else if (_selection == "6")
+            {
+                int maximum = _journal._entries.Count;
+                Console.Write($"Enter the entry number (Betwwen 1 and {maximum}): ");
+                int response = int.Parse(Console.ReadLine());
+                if (response > 0 && response <= maximum)
+                {
+                    _journal.DeleteEntry(response - 1);
+                }
+                else
+                {
+                    Console.WriteLine("No such entry exists");
+                }
             }
             else
             {

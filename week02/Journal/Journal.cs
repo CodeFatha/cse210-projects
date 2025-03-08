@@ -42,4 +42,9 @@ public class Journal
     {
         _entries.Add(entry);
     }
+
+    public void DeleteEntry(int index)
+    {
+        _entries.RemoveAt(index);
+    }
 }
