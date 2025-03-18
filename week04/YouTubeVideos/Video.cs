@@ -12,7 +12,7 @@ public class Video
         _duration = duration;
     }
 
-    public int numberOfComments()
+    public int NumberOfComments()
     {
         return _comments.Count;
     }

@@ -28,7 +28,7 @@ class Program
 
         foreach (var video in videos)
         {
-            Console.WriteLine($"Title: {video._title} \nAuthor: {video._author} \nDuration: {video._duration}s \nComments: {video.numberOfComments()}");
+            Console.WriteLine($"Title: {video._title} \nAuthor: {video._author} \nDuration: {video._duration}s \nComments: {video.NumberOfComments()}");
             foreach (var comment in video._comments)
             {
                 Console.WriteLine($"{comment._username}: {comment._commentText}");
