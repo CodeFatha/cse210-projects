@@ -71,4 +71,16 @@ public class Activity
             Console.SetCursorPosition(0, Console.CursorTop);
         }
     }
+
+    public void Spinner(string text)
+    {
+        string blade = "/-|\\";
+        Console.Write(text);
+        for (int i = 0; i < 15; i++)
+        {
+            Console.Write(blade[i % blade.Length]);
+            Thread.Sleep(333);
+            Console.Write("\b");
+        }
+    }
 }

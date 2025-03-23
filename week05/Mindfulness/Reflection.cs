@@ -47,6 +47,8 @@ public class Reflection : Activity
         Console.WriteLine($"==={_prompts[index]}===");
         Console.WriteLine("Press the Enter key when you are ready to continue");
         Console.Read();
+        Spinner("Loading...");
+        Console.WriteLine();
         while (timer.Elapsed.Seconds < _duration)
         {
             index = generator.Next(0, _reflections.Length);

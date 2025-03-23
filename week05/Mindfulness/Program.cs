@@ -16,7 +16,7 @@ class Program
                 int duration = int.Parse(Console.ReadLine());
                 BreathingActivity ba = new(duration);
                 Console.WriteLine(ba.WelcomeMessage());
-                ba.Pause(5, "Loading");
+                ba.Spinner("Getting started...");
                 ba.Excercise();
                 Console.WriteLine(ba.GoodbyeMessage());
                 break;
