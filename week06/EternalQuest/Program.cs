@@ -4,6 +4,10 @@ class Program
 {
     static void Main(string[] args)
     {
+        /* Added a check to stop the user from recording a completed goal
+        *  Added a prompt to inform the user of the status
+        */
+
         bool isRun = true;
         List<Goal> goals = new List<Goal>();
         int totalPoints = 0;
