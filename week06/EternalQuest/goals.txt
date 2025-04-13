@@ -1,0 +1,4 @@
+Simple~Testing simple goal~50~True
+Eternal~Testing eternal goal~100
+Checklist~Testing checklist goal~100~2~3~200
+250

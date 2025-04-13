@@ -28,8 +28,17 @@ public class ChecklistGoal : Goal
     {
         return _bonus;
     }
-    public void ResetCompleted()
+    public int GetCompleted()
     {
-        _completed = 0;
+        return _completed;
+    }
+    public int GetTarget()
+    {
+        return _target;
+    }
+
+    public void SetCompleted(int compeleted)
+    {
+        _completed = compeleted;
     }
 }

@@ -58,30 +58,67 @@ class Program
                     }
                     break;
                 case "3":
-                    Console.Write("Enter a file name: ");
+                    Console.Write("Enter a file name (append '.txt'): ");
                     string fileName = Console.ReadLine();
                     using (StreamWriter writer = new StreamWriter(fileName, false))
                     {
                         foreach (var item in goals)
                         {
-                            writer.WriteLine($"{item.GetName()}~{item.GetDescription()}~{item.GetPoints()}~{item.IsComplete()}");
+                            writer.Write($"{item.GetName()}~{item.GetDescription()}~{item.GetPoints()}");
+                            if (item.GetType().ToString() == "SimpleGoal")
+                            {
+                                writer.WriteLine($"~{item.IsComplete()}");
+                            }
+                            else if (item.GetType().ToString() == "ChecklistGoal")
+                            {
+                                ChecklistGoal checklist = (ChecklistGoal)item;
+                                writer.WriteLine($"~{checklist.GetCompleted()}~{checklist.GetTarget()}~{checklist.GetBonus()}");
+                            }
+                            else
+                            {
+                                writer.WriteLine();
+                            }
                         }
+                        writer.WriteLine($"{totalPoints}");
                     }
                     break;
                 case "4":
-                    Console.Write("What is the name of the file (incl extension): ");
+                    Console.Write("What is the name of the file (incl. extension): ");
                     string file = Console.ReadLine();
                     string[] lines = File.ReadAllLines(file);
                     foreach (var line in lines)
                     {
-                        if (!string.IsNullOrEmpty(line))
+                        if (!string.IsNullOrEmpty(line) && line.Contains('~'))
                         {
-                            string[] component = line.Split("~");
-                            string goalName = component[0];
-                            string goalDescription = component[1];
-                            string goalPoints = component[2];
-                            // Goal myGoal = new(goalName, goalDescription, goalPoints);
-                            // goals.Add(myGoal);
+                            string[] components = line.Split("~");
+                            string goalName = components[0];
+                            string goalDescription = components[1];
+                            int goalPoints = int.Parse(components[2]);
+                            if (components.Length == 4)
+                            {
+                                bool isComplete = bool.Parse(components[3]);
+                                SimpleGoal retrievedGoal = new(goalName, goalDescription, goalPoints);
+                                retrievedGoal.SetIsComplete(isComplete);
+                                goals.Add(retrievedGoal);
+                            }
+                            else if (components.Length == 6)
+                            {
+                                int completed = int.Parse(components[3]);
+                                int target = int.Parse(components[4]);
+                                int bonus = int.Parse(components[5]);
+                                ChecklistGoal retrievedGoal = new(goalName, goalDescription, goalPoints, target, bonus);
+                                retrievedGoal.SetCompleted(completed);
+                                goals.Add(retrievedGoal);
+                            }
+                            else
+                            {
+                                EternalGoal retrievedGoal = new(goalName, goalDescription, goalPoints);
+                                goals.Add(retrievedGoal);
+                            }
+                        }
+                        else
+                        {
+                            totalPoints = int.Parse(line);
                         }
                     }
                     break;
@@ -93,7 +130,7 @@ class Program
                         Console.WriteLine($"{count}. {item.GetName()}");
                         count++;
                     }
-                    Console.Write("Select a goal to record:");
+                    Console.Write("Select a goal to record: ");
                     int selection = int.Parse(Console.ReadLine());
                     Goal currentGoal = goals[selection - 1];
                     if (currentGoal.IsComplete())

@@ -20,4 +20,8 @@ public class SimpleGoal : Goal
     {
         _isComplete = true;
     }
+    public void SetIsComplete(bool isComplete)
+    {
+        _isComplete = isComplete;
+    }
 }
